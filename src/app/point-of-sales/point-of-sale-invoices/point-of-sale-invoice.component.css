@@ -1,0 +1,43 @@
+.layout-wrapper .layout-content {
+  padding: 15px !important;
+}
+
+::ng-deep .p-autocomplete-panel {
+  background: #ffffff;
+  color: #000000;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  margin-top: 12px;
+  min-height: 50vh !important;
+  height: 50vh !important;
+}
+
+::ng-deep .p-dialog-content {
+  overflow: visible !important;
+}
+
+::ng-deep .p-splitter {
+  height: 93vh !important;
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+  height: 100%;
+}
+
+/* .main_div { 
+    text-align:center; 
+    position: relative; 
+    left: 100px; 
+    height: 200px; 
+    width: 500px; 
+    background-color: red;  
+} 
+.sub_div { 
+    position: absolute; 
+    bottom: 100px; 
+} 
+p { 
+    margin-left:110px; 
+}  */

@@ -1,0 +1,50 @@
+<h4>{{ _pageTitle }} {{ _pageSubTitle }}</h4>
+
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        <p-button label="CREATE" [routerLink]= "'/item-catagories/create'" class="p-mr-2 p-mb-3"></p-button>                  
+    </div>        
+</p-toolbar>
+
+<!-- <p-divider></p-divider> -->
+
+<div class="card" style="padding: 0px !important; height: 100%;">
+    <p-table #dt [value]="_itemCategories" dataKey="id" [rows]="1000" [showCurrentPageReport]="true" [scrollable]="true" scrollHeight="calc(100vh - 275px)"
+	[rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm p-datatable-customers p-datatable-responsive-demo p-datatable-striped"
+	[paginator]="true"  [paginatorPosition]="'top'" selectionMode="single" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+	[globalFilterFields]="['code','name']">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <button type="button" pButton pRipple icon="pi pi-refresh" (click)="dt.exportCSV()" class="p-button-rounded p-button-outlined p-mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-o" (click)="dt.exportCSV()" class="p-button-rounded p-button-outlined p-mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-rounded p-button-outlined p-mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-rounded p-button-outlined p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-filter" (click)="dt.exportCSV({selectionOnly:true})" class="p-button-rounded p-button-outlined p-mr-2" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                
+                <span class="p-ml-auto">
+                    <!-- <i class="pi pi-search"></i> -->
+                    <input pInputText type="text" placeholder="Search keyword..." />
+                </span>
+                
+            </div>           
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon></th>
+                <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr [pSelectableRow]="item">
+                <td>{{item.code}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.category}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.price}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

@@ -1,0 +1,247 @@
+<div [style]="{
+    'margin-top': '-15px',
+    'margin-bottom': '15px',
+    'width': '100%',
+    'background-color': 'rgb(170, 190, 190)'
+  }">
+    <p-splitter styleClass="p-mb-5" [panelSizes]="[70, 30]">
+        <ng-template pTemplate>
+            <div [style]="{ width: '100%' }">
+                <p-card [style]="{ width: '100%' }">
+                    <div class="p-fluid">
+                        <div class="col-g-12">
+                            <p-autoComplete id="acSimple" class="ui-inputtext-medication-search"
+                                [suggestions]="_filteredItems" (completeMethod)="onFilterItems($event)"
+                                placeholder="Scan Barcode" [minLength]="1" [style]="{ width: '100%' }"
+                                [inputStyle]="{ width: '100%', 'font-size': '20px' }"
+                                (keyup)="onItemAutoComplete_KeyUp($event)"
+                                (onSelect)="onItemAutoComplete_Select($event)" [delay]=600 #id_autoComplete_item>
+                                <ng-template let-item pTemplate="listItem">
+                                    <div class="ui-g" style="padding: 5px; border-bottom: 1px solid #d9d9d9">
+                                        <div class="p-field p-grid">
+                                            <div class="p-col-1">
+                                                {{ item.code }}
+                                            </div>
+                                            <div class="p-col-8">
+                                                {{ item.name }}
+                                            </div>
+                                            <div class="p-col-1">
+                                                {{ item.stockInHand }}
+                                            </div>
+                                            <div class="p-col-1">
+                                                {{ item.sellingPrice }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
+
+                            <p-table [value]="_invoiceItems"
+                                dataKey="id" [paginator]="false" [responsive]="true" [scrollable]="true"
+                                scrollHeight="85vh" selectionMode="single">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <!-- <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                                            [ngStyle]="{ width: col.width, 'text-align': col.align }"
+                                            [hidden]="!col.visible">
+                                            {{ col.header }}                                            
+                                        </th> -->
+                                        <th [ngStyle]="{'width': '5%'}" pSortableColumn="id">ID</th>
+                                        <th [ngStyle]="{'width': '5%'}" pSortableColumn="code">CODE</th>
+                                        <th [ngStyle]="{'width': '30%'}" pSortableColumn="name">NAME</th>
+                                        <th [ngStyle]="{'width': '5%'}" pSortableColumn="sellingPrice">PRICE</th>
+                                        <th [ngStyle]="{'width': '5%'}" pSortableColumn="quantity">QTY</th>
+                                        <th [ngStyle]="{'width': '5%'}" pSortableColumn="code">SUB TOT.</th>
+                                        <th [ngStyle]="{'width': '5%'}" pSortableColumn="code">DISCOUNT</th>
+                                        <th [ngStyle]="{'width': '5%'}" pSortableColumn="code">TOTAL</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-invoiceItem>
+                                    <tr class="ui-selectable-row">
+                                        <td [ngStyle]="{'width': '5%'}">{{ invoiceItem?.id }}</td>
+                                        <td [ngStyle]="{'width': '5%'}">{{ invoiceItem?.item?.code }}</td>
+                                        <td [ngStyle]="{'width': '30%'}">{{ invoiceItem?.item?.name }}</td>
+                                        <td [ngStyle]="{'width': '5%'}">{{ invoiceItem?.sellingPrice }}</td>
+                                        <td [ngStyle]="{'width': '5%'}">{{ invoiceItem?.quantity }}</td>
+                                        <td [ngStyle]="{'width': '5%'}">{{ invoiceItem?.sellingPrice }}</td>
+                                        <td [ngStyle]="{'width': '5%'}">{{ invoiceItem?.sellingPrice }}</td>
+                                        <td [ngStyle]="{'width': '5%'}">{{ invoiceItem?.sellingPrice }}</td>
+                                        <!-- <td>
+                                            <div>
+                                                {{ invoiceItem?.item?.code }}
+                                            </div>
+                                        </td>                                         
+                                        <td>
+                                            <div>
+                                                {{ invoiceItem?.item?.name }}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                {{ invoiceItem?.quantity }}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                {{ invoiceItem?.sellingPrice }}
+                                            </div>
+                                        </td> -->
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </p-card>
+            </div>
+        </ng-template>
+        <ng-template pTemplate>            
+            <div [style]="{ width: '100%' }">
+                <p-card [style]="{ width: '100%' }">
+                    <div class="p-d-flex p-ai-center">
+                        <div class="p-d-flex p-ai-center">
+                            <p-chip label="F2 - Select / Add Customer" styleClass="p-mr-2"></p-chip>
+                            <p-chip label="F1 - Find Item" styleClass="p-mr-2"></p-chip>
+                            <p-chip label="End - End Invoice" styleClass="p-mr-2"></p-chip>
+                            <p-chip label="Mystery" styleClass="p-mr-2"></p-chip>
+                            <p-chip label="Thriller" [removable]="true"></p-chip>
+                        </div>               
+                    </div>
+                    <div class="p-grid dashboard">
+                        <div class="p-col-12 p-md-12 p-lg-12">
+                            <div class="p-grid p-nogutter overview-box overview-box-1">
+                                <div class="p-col-6 overview-box-icon">
+                                    <span class="overview-box-count">Total:</span>
+                                    <span class="overview-box-name">Rs</span>
+                                </div>
+                                <div class="p-col-6">
+                                    <span class="overview-box-count">253</span>
+                                    <span class="overview-box-name">FILES RECEIVED</span>
+                                    <span class="overview-box-rate">+10%</span>
+                                </div>
+                            </div>
+                            <div class="p-grid p-nogutter overview-box overview-box-1">
+                                <div class="p-col-6 overview-box-icon">
+                                    <span class="overview-box-count">Customer:</span>
+                                    <span class="overview-box-name">Rs</span>
+                                </div>
+                                <div class="p-col-6">
+                                    <span class="overview-box-count">Mr. ABC</span>
+                                    <span class="overview-box-name">FILES RECEIVED</span>
+                                    <span class="overview-box-rate">+10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p-card>
+            </div>
+        </ng-template>
+    </p-splitter>
+</div>
+
+<!-- <p-splitter styleClass="p-mb-5" [style]="{'margin':'0 -15px 0 -15px', 'width': '100vw'}">
+    <ng-template pTemplate>
+        
+        <div [style]="{'margin':'0 0 0 0', 'width': '100%'}">
+            <p-panel [style]="{'margin':'0 0 0 10px', 'width': '100%'}">
+                <p-header>
+                    <span>Allergies</span>
+                   
+                </p-header>                                
+            </p-panel>
+        </div>
+    </ng-template>
+    <ng-template pTemplate>
+        
+    </ng-template>
+</p-splitter> -->
+
+<p-dialog header="Item Search" [(visible)]="_isDisplaySearch" [modal]="true"
+    [style]="{'width': '50vw', 'height': '80vh'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false"
+    (onShow)="onItemSearchDialogAfterShow()">
+
+    <p-autoComplete id="acSimple" class="" [suggestions]="_filteredItems" (completeMethod)="onFilterItems($event)"
+        placeholder="Search items" [minLength]="1" [style]="{ width: '100%' }"
+        [inputStyle]="{ width: '100%', 'font-size': '20px' }" (keyup)="onItemAutoComplete_KeyUp($event)"
+        (onSelect)="onItemAutoComplete_Select($event)" #id_autoComplete_item_search>
+        <ng-template let-item pTemplate="listItem">
+            <div class="ui-g" style="padding: 5px; border-bottom: 1px solid #d9d9d9">
+                <div class="p-field p-grid">
+                    <div class="p-col-1">
+                        {{ item.code }}
+                    </div>
+                    <div class="p-col-8">
+                        {{ item.name }}
+                    </div>
+                    <div class="p-col-1">
+                        {{ item.stockInHand }}
+                    </div>
+                    <div class="p-col-1">
+                        {{ item.sellingPrice }}
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+    </p-autoComplete>
+
+</p-dialog>
+
+<p-dialog header="Item Batch" [(visible)]="_isDisplaySearch" [modal]="true"
+    [style]="{'width': '50vw', 'height': '80vh'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false"
+    (onShow)="onItemSearchDialogAfterShow()">
+
+    <p-table [columns]="_itemBatchColumns" [value]="_itemBatches" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>                
+                <th *ngFor="let col of _itemBatchColumns" [pSortableColumn]="col.field" [ngStyle]="{'width': col.width}" [hidden]="!col.visible">
+                  {{col.header}}                  
+                </th>
+              </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td pEditableColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="product.code">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{product.code}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td pEditableColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="product.name" required>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{product.name}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td pEditableColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText [(ngModel)]="product.inventoryStatus">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{product.inventoryStatus}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td pEditableColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="product.price">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{product.price | currency: 'USD'}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-dialog>

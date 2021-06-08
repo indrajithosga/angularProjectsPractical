@@ -1,0 +1,89 @@
+<!-- <h1>top bar</h1> -->
+<div class="topbar clearfix" style="display: inline-flex">
+    <a id="menu-button" (click)="visibleSidebar = true">
+        <i class="pi pi-th-large" style="font-size: 1.4em"></i>
+    </a>
+
+    <a class="app-logo-link" href="#">
+        <span class="app-logo-text"> App Name </span>
+    </a>
+
+    <p-menubar [model]="items"> </p-menubar>
+</div>
+
+<p-sidebar [(visible)]="visibleSidebar" [fullScreen]="true" [baseZIndex]="10000">
+    <h1 style="font-weight: normal">Modules</h1>
+
+    <div class="p-grid">
+
+        <div class="card">
+        
+            <!-- <p-button pripple="" type="button" class="p-button p-component p-ripple p-mr-2 p-mb-2">
+                <span class="pi pi-bookmark p-button-icon p-button-icon-left ng-star-inserted" aria-hidden="true"></span>
+                <span class="p-button-label" aria-hidden="false">POS</span>
+                <span class="p-ink"></span>
+            </p-button> -->
+            
+            <button pbutton="" label="POS" icon="pi pi-bookmark" class="p-mr-2 p-mb-2 p-mt-2" [routerLink]="'/point-of-sale'" (click)="visibleSidebar = false">
+    
+            </button>
+    
+            
+        </div>
+
+        
+    <div class="card">
+        <h5>Rounded Icons</h5>
+        <button pbutton="" pripple="" type="button" icon="pi pi-check"
+            class="p-button-rounded p-mr-2 p-mb-2 p-ripple p-button p-component p-button-icon-only">
+            <span class="p-button-icon pi pi-check" aria-hidden="tre">POS</span>
+            <span aria-hidden="false" class="p-button-label">POS</span>
+            <span class="p-ink"></span>
+        </button>
+        <button pbutton="" pripple="" type="button" icon="pi pi-bookmark"
+            class="p-button-rounded p-button-secondary p-mr-2 p-mb-2 p-ripple p-button p-component p-button-icon-only">
+            <span class="p-button-icon pi pi-bookmark" aria-hidden="true"></span>
+            <span aria-hidden="true" class="p-button-label"></span>
+            <span class="p-ink"></span>
+        </button>
+        <button pbutton="" pripple="" type="button" icon="pi pi-search"
+            class="p-button-rounded p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component p-button-icon-only">
+            <span class="p-button-icon pi pi-search" aria-hidden="true"></span>
+            <span aria-hidden="true" class="p-button-label"></span>
+            <span class="p-ink"></span>
+        </button>
+        <button pbutton="" pripple="" type="button" icon="pi pi-user"
+            class="p-button-rounded p-button-info p-mr-2 p-mb-2 p-ripple p-button p-component p-button-icon-only">
+            <span class="p-button-icon pi pi-user" aria-hidden="true"></span>
+            <span aria-hidden="true" class="p-button-label"></span>
+            <span class="p-ink"></span>
+        </button>
+        <button pbutton="" pripple="" type="button" icon="pi pi-bell"
+            class="p-button-rounded p-button-warning p-mr-2 p-mb-2 p-ripple p-button p-component p-button-icon-only">
+            <span class="p-button-icon pi pi-bell" aria-hidden="true"></span>
+            <span aria-hidden="true" class="p-button-label"></span>
+            <span class="p-ink"></span>
+        </button>
+        <button pbutton="" pripple="" type="button" icon="pi pi-heart"
+            class="p-button-rounded p-button-help p-mr-2 p-mb-2 p-ripple p-button p-component p-button-icon-only">
+            <span class="p-button-icon pi pi-heart" aria-hidden="true"></span>
+            <span aria-hidden="true" class="p-button-label"></span>
+            <span class="p-ink"></span>
+        </button>
+        <button pbutton="" pripple="" type="button" icon="pi pi-times"
+            class="p-button-rounded p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component p-button-icon-only">
+            <span class="p-button-icon pi pi-times" aria-hidden="true"></span>
+            <span aria-hidden="true" class="p-button-label"></span>
+            <span class="p-ink"></span>
+        </button>
+    </div>
+
+    </div>
+
+
+
+
+
+    <p-button type="button" (click)="visibleSidebar = false" label="Save" styleClass="p-button-success"></p-button>
+    <p-button type="button" (click)="visibleSidebar = false" label="Cancel" styleClass="p-button-secondary"></p-button>
+</p-sidebar>
